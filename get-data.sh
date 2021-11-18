@@ -40,16 +40,16 @@ mv "${DOWNLOAD}/psgs_w100.tsv" "${ROOT}/psgs_w100.tsv"
 wget -c https://raw.githubusercontent.com/google-research-datasets/natural-questions/master/nq_open/NQ-open.dev.jsonl -P "${DOWNLOAD}"
 wget -c https://raw.githubusercontent.com/google-research-datasets/natural-questions/master/nq_open/NQ-open.train.jsonl -P "${DOWNLOAD}"
 
-wget -c http://nlp.cs.washington.edu/triviaqa/data/triviaqa-unfiltered.tar.gz -P "${DOWNLOAD}"
-tar xvzf "${DOWNLOAD}/triviaqa-unfiltered.tar.gz" -C "${DOWNLOAD}"
+# wget -c http://nlp.cs.washington.edu/triviaqa/data/triviaqa-unfiltered.tar.gz -P "${DOWNLOAD}"
+# tar xvzf "${DOWNLOAD}/triviaqa-unfiltered.tar.gz" -C "${DOWNLOAD}"
 
 wget -c https://dl.fbaipublicfiles.com/FiD/data/dataindex.tar.gz -P "${DOWNLOAD}"
 tar xvzf "${DOWNLOAD}/dataindex.tar.gz" -C "${DOWNLOAD}"
 wget -c https://dl.fbaipublicfiles.com/FiD/data/nq_passages.tar.gz -P "${DOWNLOAD}"
 wget -c https://dl.fbaipublicfiles.com/FiD/data/tqa_passages.tar.gz -P "${DOWNLOAD}"
-tar xvzf "${DOWNLOAD}/tqa_passages.tar.gz" -C "${DOWNLOAD}"
+# tar xvzf "${DOWNLOAD}/tqa_passages.tar.gz" -C "${DOWNLOAD}"
 tar xvzf "${DOWNLOAD}/nq_passages.tar.gz" -C "${DOWNLOAD}"
 
 echo "Processing "$ROOT""
-python src/preprocess.py $DOWNLOAD $ROOT
+python3 src/preprocess.py $DOWNLOAD $ROOT
 rm -r "${DOWNLOAD}"
