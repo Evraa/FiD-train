@@ -103,7 +103,7 @@ def init_distributed_mode(params):
 
     # multi-GPU job (local or multi-node) - jobs started with torch.distributed.launch
     elif has_local_rank and params.local_rank != -1:
-
+        print ("Got into the dist. mode")
         assert params.main_port == -1
 
         # read environment variables
@@ -118,6 +118,7 @@ def init_distributed_mode(params):
 
     else:
         n_gpu = torch.cuda.device_count()
+        print (f"N OF GPUS: {n_gpu}")
         params.n_nodes = 1
         params.node_id = 0
         params.local_rank = 0
