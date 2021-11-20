@@ -77,7 +77,8 @@ def load(model_class, dir_path, opt, reset_params=False):
     model = model.to(opt.device)
     logger.info("loading checkpoint %s" %optimizer_path)
     checkpoint = torch.load(optimizer_path, map_location=opt.device)
-    opt_checkpoint = checkpoint["opt"]
+    # opt_checkpoint = checkpoint["opt"]
+    opt_checkpoint = opt
     step = checkpoint["step"]
     if "best_eval_metric" in checkpoint:
         best_eval_metric = checkpoint["best_eval_metric"]
