@@ -30,5 +30,5 @@ python3 train_reader.py \
         --scheduler linear \
         --weight_decay 0.01 \
         --text_maxlength 250 \
-        --total_step 15000 \
+        --total_step 150 \
         --warmup_step 1000 \
