@@ -79,7 +79,8 @@ def load(model_class, dir_path, opt, reset_params=False):
     checkpoint = torch.load(optimizer_path, map_location=opt.device)
     # opt_checkpoint = checkpoint["opt"]
     opt_checkpoint = opt
-    step = checkpoint["step"]
+    # step = checkpoint["step"]
+    step = 1
     if "best_eval_metric" in checkpoint:
         best_eval_metric = checkpoint["best_eval_metric"]
     else:
