@@ -103,13 +103,21 @@ def init_distributed_mode(params):
 
     # multi-GPU job (local or multi-node) - jobs started with torch.distributed.launch
     elif has_local_rank and params.local_rank != -1:
-        print ("Got into the dist. mode")
+        # print ("Got into the dist. mode")
         assert params.main_port == -1
 
         # read environment variables
-        params.global_rank = int(os.environ['RANK'])
-        params.world_size = int(os.environ['WORLD_SIZE'])
-        params.n_gpu_per_node = int(os.environ['NGPU'])
+        n_gpu = torch.cuda.device_count()
+        print (f"N OF GPUS: {n_gpu}")
+        
+        # params.global_rank = int(os.environ['RANK'])
+        # params.world_size = int(os.environ['WORLD_SIZE'])
+        # params.n_gpu_per_node = int(os.environ['NGPU'])
+        
+        params.global_rank = int(0)
+        params.world_size = int(n_gpu)
+        params.n_gpu_per_node = int(n_gpu)
+
 
         # number of nodes / node ID
         params.n_nodes = params.world_size // params.n_gpu_per_node
