@@ -65,7 +65,8 @@ def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, c
 
             train_loss = src.util.average_main(train_loss, opt)
             curr_loss += train_loss.item()
-
+            print (f"epoch: {epoch}\t step: {step}\t batch: {i}\tloss: {train_loss.item():.3f}")
+                    
             if step % opt.eval_freq == 0:
                 dev_em = evaluate(model, eval_dataset, tokenizer, collator, opt)
                 model.train()
