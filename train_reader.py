@@ -46,8 +46,6 @@ def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, c
     while step < opt.total_steps:
         epoch += 1
         for i, batch in enumerate(train_dataloader):
-            print (f"epoch: {epoch}\t step: {step}\t batch: {i}\tloss: {curr_loss}")
-
             step += 1
             (idx, labels, _, context_ids, context_mask) = batch
 
@@ -82,6 +80,7 @@ def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, c
                     log += f"lr: {scheduler.get_last_lr()[0]:.5f}"
                     logger.info(log)
                     print (f"LOGS: {log}")
+                    print (f"epoch: {epoch}\t step: {step}\t batch: {i}\tloss: {curr_loss/opt.eval_freq:.3f}")
                     curr_loss = 0
                     if tb_logger is not None:
                         tb_logger.add_scalar("Evaluation", dev_em, step)
