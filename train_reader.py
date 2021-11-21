@@ -65,7 +65,7 @@ def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, c
 
             train_loss = src.util.average_main(train_loss, opt)
             curr_loss += train_loss.item()
-            print (f"epoch: {epoch}\t step: {step}\t batch: {i}\tloss: {train_loss.item():.3f}")
+            print (f"epoch: {epoch}\t step/batch: {step}\tloss: {train_loss.item():.3f}")
                     
             if step % opt.eval_freq == 0:
                 dev_em = evaluate(model, eval_dataset, tokenizer, collator, opt)
@@ -80,8 +80,8 @@ def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, c
                     log += f"evaluation: {100*dev_em:.2f}EM |"
                     log += f"lr: {scheduler.get_last_lr()[0]:.5f}"
                     logger.info(log)
-                    print (f"LOGS: {log}")
-                    print (f"epoch: {epoch}\t step: {step}\t batch: {i}\tloss: {curr_loss/opt.eval_freq:.3f}")
+                    # print (f"LOGS: {log}")
+                    print (f"CHKP >> epoch: {epoch}\t step: {step}\t batch: {i}\tloss: {curr_loss/opt.eval_freq:.3f}")
                     curr_loss = 0
                     if tb_logger is not None:
                         tb_logger.add_scalar("Evaluation", dev_em, step)
