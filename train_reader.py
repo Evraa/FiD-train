@@ -46,7 +46,7 @@ def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, c
     while step < opt.total_steps:
         epoch += 1
         for i, batch in enumerate(train_dataloader):
-            print (f"epoch: {epoch}\t step: {step}\t batch: {i}")
+            print (f"epoch: {epoch}\t step: {step}\t batch: {i}\tloss: {curr_loss}")
 
             step += 1
             (idx, labels, _, context_ids, context_mask) = batch
