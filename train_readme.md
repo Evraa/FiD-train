@@ -16,20 +16,21 @@ Default value for calling subprocesses is `python` so if you're using updated py
 
 
 --model_path pretrained_models/nq_reader_base\
+--local_rank 4
+
 python3 train_reader.py \
-        --train_data open_domain_data/NQ/train.json \
-        --eval_data  open_domain_data/NQ/dev.json \
+        --train_data open_domain_data/NQ/dev.json \
+        --eval_data  open_domain_data/NQ/test.json \
         --model_size base \
         --per_gpu_batch_size 1 \
-        --n_context 100 \
-        --name my_experiment_1 \
+        --n_context 50 \
+        --name my_experiment_50 \
         --checkpoint_dir checkpoint \
         --use_checkpoint \
-        --lr 0.00005 \
+        --lr 0.0001 \
         --optim adamw \
         --scheduler linear \
         --weight_decay 0.01 \
         --text_maxlength 250 \
-        --total_step 150 \
+        --total_step 1000 \
         --warmup_step 1000 \
-        --has_local_rank 4
