@@ -1012,4 +1012,5 @@ class TrainModel(ParlaiScript):
 
 
 if __name__ == '__main__':
+    print ("EV>> hellow and welcome")
     TrainModel.main()
