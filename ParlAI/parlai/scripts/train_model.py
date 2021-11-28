@@ -850,10 +850,15 @@ class TrainLoop:
         logging.info('training...')
         opt = self.opt
         world = self.world
+        print (f"EV>> world/task obj: {world}")
+        print (f"EV>> agent obj: {world.agents}")
+        tr_step = 0
         with world:
             while True:
                 # do one example / batch of examples
                 try:
+                    tr_step += 1
+                    print (f"EV>> training setp: {tr_step}")
                     world.parley()
                 except StopTrainException as e:
                     logging.info(f"Stopping from {e}")
@@ -946,18 +951,22 @@ class TrainLoop:
 
         :return: tuple of reports (validation_report, test_report)
         """
+        print ("EV>> Start trainig...")
         opt = self.opt
         for _train_log in self.train_steps():
             # we've already done what we need in these
             pass
 
         # perform final validation/testing
+
         valid_worlds = load_eval_worlds(self.agent, opt, 'valid')
+        print ("EV>> loaded eval world")
         max_exs = opt['validation_max_exs'] if opt.get('short_final_eval') else -1
         self.final_valid_report = self._run_eval(
             valid_worlds, opt, 'valid', max_exs, write_log=True
         )
         test_worlds = load_eval_worlds(self.agent, opt, 'test')
+        print ("EV>> loaded test world")
         self.final_test_report = self._run_eval(
             test_worlds, opt, 'test', max_exs, write_log=True
         )
@@ -991,6 +1000,7 @@ class TrainLoop:
 class TrainModel(ParlaiScript):
     @classmethod
     def setup_args(cls):
+        print (f"Ev>> argument setup")
         return setup_args()
 
     def run(self):
